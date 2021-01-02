@@ -1,0 +1,10 @@
+package com.spring.appuser.service;
+
+import com.spring.appuser.dto.UserDto;
+
+/*
+ *Created by olga on 02.01.2021
+ */
+public interface UsersService {
+    UserDto createUser(UserDto userDetails);
+}
