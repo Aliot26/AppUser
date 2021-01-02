@@ -1,6 +1,10 @@
 package com.spring.appuser.controller;
 
 import com.spring.appuser.dto.CreateUserRequestModel;
+import com.spring.appuser.dto.UserDto;
+import com.spring.appuser.service.UsersService;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +17,15 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    @Autowired
+
     private Environment env;
+
+    UsersService usersService;
+
+    public UserController(Environment env, UsersService usersService) {
+        this.env = env;
+        this.usersService = usersService;
+    }
 
     @GetMapping("/status/check")
     public String status(){
@@ -23,6 +34,12 @@ public class UserController {
 
     @PostMapping
     public String createUser(@Valid @RequestBody CreateUserRequestModel usersDetails){
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
+        UserDto userDto = modelMapper.map(usersDetails, UserDto.class);
+
+        usersService.createUser(userDto);
         return "createUser method is called";
     }
 }
