@@ -1,11 +1,11 @@
 package com.spring.appuser.controller;
 
+import com.spring.appuser.model.CreateUserRequestModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /*
  *Created by olga on 29.12.2020
@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping
-    public String createUser(){
+    public String createUser(@Valid @RequestBody CreateUserRequestModel usersDetails){
         return "createUser method is called";
     }
 }
