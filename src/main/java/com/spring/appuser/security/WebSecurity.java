@@ -39,7 +39,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/**")
 //                .permitAll();
-                .hasIpAddress("192.168.1.16")
+                .hasIpAddress(environment.getProperty("gateway.ip"))
                 .and()
                 .addFilter(getAuthenticationFilter());
         http.headers().frameOptions().disable();
