@@ -48,6 +48,7 @@ public class UserController {
         UserDto userDto = modelMapper.map(usersDetails, UserDto.class);
         UserDto createdUser = usersService.createUser(userDto);
         CreateUserResponseModel returnValue = modelMapper.map(createdUser, CreateUserResponseModel.class);
+        System.out.println(env.getProperty("my.message"));
         return ResponseEntity.status(HttpStatus.CREATED).body(returnValue) ;
     }
 }
